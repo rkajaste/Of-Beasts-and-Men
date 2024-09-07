@@ -1,0 +1,226 @@
+[gd_scene load_steps=20 format=3 uid="uid://bs6hbdtw8ou0g"]
+
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_f8f05"]
+[ext_resource type="Shader" path="res://Shaders/SpriteOutline.gdshader" id="1_s4h20"]
+[ext_resource type="Texture2D" uid="uid://cscfchqn8jcfn" path="res://Assets/sprites/powers.png" id="2_j0j0f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmrhm"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm8dc"]
+bg_color = Color(0.396868, 0.161103, 0.0176024, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cofp"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oohd2"]
+bg_color = Color(0.664361, 0.103001, 0.171616, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yv7p"]
+bg_color = Color(0.201527, 0.201527, 0.201526, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87jf6"]
+bg_color = Color(0.198463, 0.719766, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vurlp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lunul"]
+bg_color = Color(0.93, 100, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r6l3r"]
+shader = ExtResource("1_s4h20")
+shader_parameter/color = Color(0.980376, 0, 0.125141, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnmr2"]
+atlas = ExtResource("2_j0j0f")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11728"]
+shader = ExtResource("1_s4h20")
+shader_parameter/color = Color(0.230325, 0.828117, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atcgy"]
+atlas = ExtResource("2_j0j0f")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqabl"]
+shader = ExtResource("1_s4h20")
+shader_parameter/color = Color(0.930192, 0.74267, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cci8q"]
+atlas = ExtResource("2_j0j0f")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mehu"]
+bg_color = Color(0.182804, 0.0112775, 0.0380892, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.131508, 0.0605152, 0.0172386, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0m8m"]
+bg_color = Color(0.529722, 0, 0.0952215, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_f8f05")
+
+[node name="Boss" type="Node2D" parent="."]
+position = Vector2(42, 484)
+
+[node name="Health" type="ProgressBar" parent="Boss"]
+offset_left = 36.0
+offset_top = 5.0
+offset_right = 826.0
+offset_bottom = 17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gmrhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wm8dc")
+max_value = 500.0
+step = 1.0
+value = 300.0
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Boss"]
+offset_left = 53.0
+offset_top = -21.0
+offset_right = 273.0
+offset_bottom = 11.0
+text = "Werewolf King"
+
+[node name="VictoryScreen" type="Node2D" parent="."]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VictoryScreen"]
+offset_left = 292.0
+offset_top = 231.0
+offset_right = 683.0
+offset_bottom = 314.0
+theme_override_colors/default_color = Color(0.764524, 0.557766, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 58
+text = "BEAST FELLED"
+
+[node name="BackToTitle" type="Button" parent="VictoryScreen"]
+offset_left = 401.0
+offset_top = 322.0
+offset_right = 515.0
+offset_bottom = 353.0
+theme_override_colors/icon_normal_color = Color(0.388235, 0.545098, 0.537255, 0)
+text = "Back to Title"
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(54, -22)
+
+[node name="StatusBar" type="Node2D" parent="Player"]
+z_index = 10
+position = Vector2(-3, 47)
+
+[node name="Health" type="ProgressBar" parent="Player/StatusBar"]
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 151.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1cofp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oohd2")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Stamina" type="ProgressBar" parent="Player/StatusBar"]
+clip_contents = true
+offset_left = 1.0
+offset_top = 22.0
+offset_right = 151.0
+offset_bottom = 32.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1yv7p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_87jf6")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Shield" type="ProgressBar" parent="Player/StatusBar"]
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 151.0
+offset_bottom = 6.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vurlp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lunul")
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="Powers" type="Node2D" parent="Player"]
+z_index = 20
+position = Vector2(-18, 26)
+
+[node name="Wolf" type="Sprite2D" parent="Player/Powers"]
+material = SubResource("ShaderMaterial_r6l3r")
+position = Vector2(736, 96)
+texture = SubResource("AtlasTexture_dnmr2")
+
+[node name="Bat" type="Sprite2D" parent="Player/Powers"]
+material = SubResource("ShaderMaterial_11728")
+position = Vector2(784, 55)
+texture = SubResource("AtlasTexture_atcgy")
+
+[node name="Bear" type="Sprite2D" parent="Player/Powers"]
+material = SubResource("ShaderMaterial_oqabl")
+position = Vector2(832, 96)
+texture = SubResource("AtlasTexture_cci8q")
+
+[node name="BeastBloodGauge" type="ProgressBar" parent="Player/Powers"]
+offset_left = 772.0
+offset_top = 109.0
+offset_right = 796.0
+offset_bottom = 209.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8mehu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m0m8m")
+step = 1.0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="GameOverScreen" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen"]
+offset_left = 292.0
+offset_top = 231.0
+offset_right = 683.0
+offset_bottom = 314.0
+theme_override_colors/default_color = Color(0.728085, 0, 0.147736, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 58
+text = "GAME OVER"
+
+[node name="BackToTitle" type="Button" parent="GameOverScreen"]
+offset_left = 401.0
+offset_top = 322.0
+offset_right = 515.0
+offset_bottom = 353.0
+theme_override_colors/icon_normal_color = Color(0.388235, 0.545098, 0.537255, 0)
+text = "Back to Title"
+
+[connection signal="pressed" from="VictoryScreen/BackToTitle" to="." method="_on_back_to_title_pressed"]
+[connection signal="pressed" from="GameOverScreen/BackToTitle" to="." method="_on_back_to_title_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj0ncj3q7lk5d"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_ynghr"]
+[ext_resource type="PackedScene" uid="uid://dxup7vhtkx60g" path="res://Scenes/wolf.tscn" id="2_wp70s"]
+[ext_resource type="PackedScene" uid="uid://cbu0yvh3am3jj" path="res://Scenes/grasslands.tscn" id="3_x452i"]
+[ext_resource type="PackedScene" uid="uid://dbc7n6h5yjb5i" path="res://Scenes/werewolf.tscn" id="11_xg3n0"]
+
+[node name="Main" type="Node" groups=["main"]]
+script = ExtResource("1_ynghr")
+mob_scene = ExtResource("2_wp70s")
+tilemap_scene = ExtResource("3_x452i")
+boss_scene = ExtResource("11_xg3n0")
+
+[node name="MobWaveTimer" type="Timer" parent="."]
+wait_time = 15.0
+
+[connection signal="timeout" from="MobWaveTimer" to="." method="_on_mob_wave_timer_timeout"]

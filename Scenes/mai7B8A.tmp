@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8lcrs4s1o428"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_qdxun"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlyie"]
+bg_color = Color(0.797782, 0.454509, 0.776041, 1)
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_qdxun")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 960.0
+offset_bottom = 539.0
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="NewGameButton" type="Panel" parent="."]
+offset_left = 320.0
+offset_top = 224.0
+offset_right = 544.0
+offset_bottom = 288.0
+focus_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_rlyie")
+
+[node name="Text" type="RichTextLabel" parent="NewGameButton"]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 224.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/default_color = Color(0.782207, 0.619251, 0.121062, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "New Game"
+
+[node name="Tutorial" type="RichTextLabel" parent="."]
+offset_left = 384.0
+offset_top = 288.0
+offset_right = 512.0
+offset_bottom = 352.0
+theme_override_colors/default_color = Color(0.467047, 0.779638, 1.54018e-06, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "Tutorial"
+
+[connection signal="gui_input" from="NewGameButton" to="." method="_on_panel_gui_input"]

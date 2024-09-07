@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://crk21y01xw6l4"]
+
+[ext_resource type="TileSet" uid="uid://ctfqbfrutf8r4" path="res://Assets/tilesets/terrain/terrain.tres" id="1_ncv7w"]
+[ext_resource type="Texture2D" uid="uid://cwagm4ixk728g" path="res://Assets/sprites/imp.png" id="2_1j6im"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="3_n8yu5"]
+[ext_resource type="Script" path="res://Scripts/floor.gd" id="4_8xeup"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8u7h"]
+size = Vector2(20, 649)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_leobv"]
+size = Vector2(24, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jwnxe"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1j6im")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfeoo"]
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(576, 328)
+tile_set = ExtResource("1_ncv7w")
+format = 2
+layer_0/tile_data = PackedInt32Array(327678, 1, 1, 327679, 1, 1, 262144, 1, 1, 262145, 1, 1, 262146, 1, 1, 262147, 1, 1, 262148, 1, 1, 262149, 1, 1, 262150, 1, 1, 262151, 1, 1, 327677, 1, 1, 327676, 1, 1, 327675, 1, 1, 327674, 1, 1, 327673, 1, 1, 327672, 1, 1, 327671, 1, 1, 262152, 1, 1)
+
+[node name="WallWest" type="Area2D" parent="TileMap"]
+position = Vector2(-576, -328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/WallWest"]
+position = Vector2(8, 323.5)
+shape = SubResource("RectangleShape2D_e8u7h")
+
+[node name="WallEast" type="Area2D" parent="TileMap"]
+position = Vector2(560, -328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/WallEast"]
+position = Vector2(8, 323.5)
+shape = SubResource("RectangleShape2D_e8u7h")
+
+[node name="Player" type="CharacterBody2D" parent="TileMap"]
+position = Vector2(-576, -328)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Player"]
+position = Vector2(580, 552.5)
+shape = SubResource("RectangleShape2D_leobv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TileMap/Player"]
+position = Vector2(576, 536)
+sprite_frames = SubResource("SpriteFrames_jwnxe")
+animation = &"idle"
+script = ExtResource("3_n8yu5")
+
+[node name="Floor" type="Area2D" parent="TileMap"]
+script = ExtResource("4_8xeup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Floor"]
+shape = SubResource("RectangleShape2D_kfeoo")
+
+[connection signal="area_entered" from="TileMap/Floor" to="TileMap/Player/AnimatedSprite2D" method="_on_floor_area_entered"]

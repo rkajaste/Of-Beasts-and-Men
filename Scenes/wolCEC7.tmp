@@ -1,0 +1,234 @@
+[gd_scene load_steps=19 format=3 uid="uid://dxup7vhtkx60g"]
+
+[ext_resource type="Texture2D" uid="uid://wri4bk0efx8w" path="res://Assets/sprites/wolf.png" id="1_68ykv"]
+[ext_resource type="Script" path="res://Scripts/Wolf.gd" id="1_voq0k"]
+[ext_resource type="Script" path="res://Scripts/Cooldowns.gd" id="3_bluw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uducr"]
+size = Vector2(68, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2jx0"]
+size = Vector2(23.5, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acqh3"]
+atlas = ExtResource("1_68ykv")
+region = Rect2(0, 0, 640, 192)
+
+[sub_resource type="Animation" id="Animation_0pk14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_unb2x"]
+resource_name = "attack_horizontal"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ypypn"]
+resource_name = "idle_horizontal"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4fa13"]
+resource_name = "walk_horizontal"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_s6svy"]
+resource_name = "walk_face"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_vuig8"]
+resource_name = "walk_back"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_mxel6"]
+resource_name = "attack_face"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_7rgci"]
+resource_name = "attack_back"
+length = 0.400001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_eapp0"]
+resource_name = "idle_face"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hih5b"]
+resource_name = "idle_back"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7msw"]
+_data = {
+"RESET": SubResource("Animation_0pk14"),
+"attack_back": SubResource("Animation_7rgci"),
+"attack_face": SubResource("Animation_mxel6"),
+"attack_horizontal": SubResource("Animation_unb2x"),
+"idle_back": SubResource("Animation_hih5b"),
+"idle_face": SubResource("Animation_eapp0"),
+"idle_horizontal": SubResource("Animation_ypypn"),
+"walk_back": SubResource("Animation_vuig8"),
+"walk_face": SubResource("Animation_s6svy"),
+"walk_horizontal": SubResource("Animation_4fa13")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywae7"]
+size = Vector2(67.75, 45.5)
+
+[node name="Wolf" type="CharacterBody2D"]
+position = Vector2(1, -5)
+script = ExtResource("1_voq0k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 24)
+shape = SubResource("RectangleShape2D_uducr")
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+position = Vector2(32, 0)
+
+[node name="Bite" type="CollisionShape2D" parent="AttackHitbox"]
+position = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_e2jx0")
+debug_color = Color(0.796078, 0.301961, 0.309804, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_acqh3")
+hframes = 5
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_i7msw")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-1, 14)
+
+[node name="Body" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4.875, 10.75)
+shape = SubResource("RectangleShape2D_ywae7")
+debug_color = Color(0.201334, 0.62891, 0.361697, 0.42)
+
+[node name="Cooldowns" type="Node" parent="."]
+script = ExtResource("3_bluw4")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

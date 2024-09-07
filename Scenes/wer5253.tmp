@@ -1,0 +1,281 @@
+[gd_scene load_steps=18 format=3 uid="uid://dbc7n6h5yjb5i"]
+
+[ext_resource type="Script" path="res://Scripts/Werewolf.gd" id="1_ngphq"]
+[ext_resource type="Texture2D" uid="uid://cf10nuov2i6wr" path="res://Assets/sprites/werewolf.png" id="1_xo5py"]
+[ext_resource type="Texture2D" uid="uid://boii0dhct5equ" path="res://Assets/telegraphs/circle.png" id="3_dyntg"]
+[ext_resource type="Script" path="res://Scripts/Cooldowns.gd" id="3_m4cjw"]
+[ext_resource type="Shader" path="res://Shaders/SpriteOutline.gdshader" id="4_5v3su"]
+[ext_resource type="Texture2D" uid="uid://dcuka65i1eoyf" path="res://Assets/telegraphs/donut.png" id="4_cl6uq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4s1b"]
+size = Vector2(110, 193)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yc27"]
+shader = ExtResource("4_5v3su")
+shader_parameter/color = Color(0.924702, 0.225707, 0.178246, 1)
+shader_parameter/width = 2.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4562"]
+atlas = ExtResource("1_xo5py")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3gqu"]
+bg_color = Color(0, 0, 0, 0.439216)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tip2"]
+bg_color = Color(0.816877, 0.0415688, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e5ts5"]
+radius = 144.003
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mcuu"]
+size = Vector2(127.25, 126.313)
+
+[sub_resource type="Gradient" id="Gradient_0u058"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.713726, 0.431373, 0.203922, 0.584314)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qem3b"]
+gradient = SubResource("Gradient_0u058")
+width = 1
+height = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cor2b"]
+size = Vector2(73, 56.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ay35"]
+size = Vector2(171.25, 159)
+
+[node name="Werewolf" type="CharacterBody2D" groups=["boss", "mobs"]]
+script = ExtResource("1_ngphq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 20
+position = Vector2(9, 4)
+shape = SubResource("RectangleShape2D_j4s1b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_8yc27")
+texture = SubResource("AtlasTexture_r4562")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+
+[node name="CastBar" type="ProgressBar" parent="."]
+z_index = 20
+offset_left = -38.0
+offset_top = -16.0
+offset_right = 44.0
+offset_bottom = -10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_r3gqu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0tip2")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Explosion" type="Area2D" parent="."]
+visible = false
+z_index = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion"]
+y_sort_enabled = true
+shape = SubResource("CircleShape2D_e5ts5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Explosion/CollisionShape2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_dyntg")
+
+[node name="IntercardinalExplosion" type="Area2D" parent="."]
+visible = false
+z_index = 5
+
+[node name="CollisionSE" type="CollisionShape2D" parent="IntercardinalExplosion"]
+position = Vector2(128, 131)
+shape = SubResource("RectangleShape2D_1mcuu")
+
+[node name="Rect" type="Sprite2D" parent="IntercardinalExplosion/CollisionSE"]
+z_index = 5
+position = Vector2(64, -187)
+scale = Vector2(128, 126)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="CollisionNE" type="CollisionShape2D" parent="IntercardinalExplosion"]
+position = Vector2(128, -119)
+shape = SubResource("RectangleShape2D_1mcuu")
+
+[node name="Rect" type="Sprite2D" parent="IntercardinalExplosion/CollisionNE"]
+z_index = 5
+position = Vector2(64, 313)
+scale = Vector2(128, 126)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="CollisionSW" type="CollisionShape2D" parent="IntercardinalExplosion"]
+position = Vector2(-110, 131)
+shape = SubResource("RectangleShape2D_1mcuu")
+
+[node name="Rect" type="Sprite2D" parent="IntercardinalExplosion/CollisionSW"]
+z_index = 5
+position = Vector2(64, 63)
+scale = Vector2(128, 126)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="CollisionNW" type="CollisionShape2D" parent="IntercardinalExplosion"]
+position = Vector2(-110, -120)
+shape = SubResource("RectangleShape2D_1mcuu")
+
+[node name="Rect" type="Sprite2D" parent="IntercardinalExplosion/CollisionNW"]
+z_index = 5
+position = Vector2(64, 63)
+scale = Vector2(128, 126)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="Donut" type="Area2D" parent="."]
+visible = false
+z_index = 5
+
+[node name="Rect" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-139, 8)
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect6" type="CollisionShape2D" parent="Donut"]
+position = Vector2(48, -127)
+rotation = -1.2898
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect9" type="CollisionShape2D" parent="Donut"]
+position = Vector2(136, -50)
+rotation = -0.37001
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect11" type="CollisionShape2D" parent="Donut"]
+position = Vector2(149, 0)
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect14" type="CollisionShape2D" parent="Donut"]
+position = Vector2(142, 60)
+rotation = 0.331613
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect15" type="CollisionShape2D" parent="Donut"]
+position = Vector2(103, 115)
+rotation = -2.31954
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect12" type="CollisionShape2D" parent="Donut"]
+position = Vector2(42, 148)
+rotation = -1.73137
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect10" type="CollisionShape2D" parent="Donut"]
+position = Vector2(100, -96)
+rotation = -0.736529
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect7" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-13, -132)
+rotation = -1.70693
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect8" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-77, -107)
+rotation = 0.958186
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect2" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-27, 149)
+rotation = -1.2898
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect3" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-86, 122)
+rotation = -0.84823
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect4" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-125, 72)
+rotation = -0.404916
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Rect5" type="CollisionShape2D" parent="Donut"]
+position = Vector2(-124, -58)
+rotation = 0.331613
+shape = SubResource("RectangleShape2D_cor2b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Donut"]
+position = Vector2(4.00001, 10.5)
+scale = Vector2(3.75, 3.73958)
+texture = ExtResource("4_cl6uq")
+
+[node name="CardinalExplosion" type="Area2D" parent="."]
+visible = false
+z_index = 5
+
+[node name="S" type="CollisionShape2D" parent="CardinalExplosion"]
+z_index = 5
+position = Vector2(10, 181)
+shape = SubResource("RectangleShape2D_6ay35")
+
+[node name="Rect" type="Sprite2D" parent="CardinalExplosion/S"]
+z_index = 5
+position = Vector2(85, 80)
+scale = Vector2(171, 159)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="N" type="CollisionShape2D" parent="CardinalExplosion"]
+z_index = 5
+position = Vector2(5, -172)
+shape = SubResource("RectangleShape2D_6ay35")
+
+[node name="Rect" type="Sprite2D" parent="CardinalExplosion/N"]
+z_index = 5
+position = Vector2(85, 80)
+scale = Vector2(171, 159)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="W" type="CollisionShape2D" parent="CardinalExplosion"]
+z_index = 5
+position = Vector2(-132, 4)
+shape = SubResource("RectangleShape2D_6ay35")
+
+[node name="Rect" type="Sprite2D" parent="CardinalExplosion/W"]
+z_index = 5
+position = Vector2(85, 80.5)
+scale = Vector2(171.625, 160)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="E" type="CollisionShape2D" parent="CardinalExplosion"]
+z_index = 5
+position = Vector2(150, 4)
+shape = SubResource("RectangleShape2D_6ay35")
+
+[node name="Rect" type="Sprite2D" parent="CardinalExplosion/E"]
+z_index = 5
+position = Vector2(85, 80.5)
+scale = Vector2(171.625, 160)
+texture = SubResource("GradientTexture2D_qem3b")
+
+[node name="ChargeAttackLine" type="Line2D" parent="."]
+z_index = 10
+default_color = Color(0.747502, 0.182436, 0.792244, 1)
+
+[node name="NextActionTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Cooldowns" type="Node" parent="."]
+script = ExtResource("3_m4cjw")
+
+[node name="Charge" type="Area2D" parent="."]
+visible = false
+
+[node name="Rect" type="CollisionShape2D" parent="Charge"]
+z_index = 20
+position = Vector2(9, 4)
+shape = SubResource("RectangleShape2D_j4s1b")
+
+[connection signal="timeout" from="NextActionTimer" to="." method="_on_next_action_timer_timeout"]

@@ -1,0 +1,312 @@
+[gd_scene load_steps=14 format=3 uid="uid://c8lcrs4s1o428"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_qdxun"]
+[ext_resource type="Shader" path="res://Shaders/SpriteOutline.gdshader" id="2_x5adi"]
+[ext_resource type="Texture2D" uid="uid://cscfchqn8jcfn" path="res://Assets/sprites/powers.png" id="3_hfov0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82w88"]
+bg_color = Color(0.166997, 0.2937, 0.129062, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqdgw"]
+bg_color = Color(0.254518, 0.192598, 0.0124268, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qt80"]
+shader = ExtResource("2_x5adi")
+shader_parameter/color = Color(0.980376, 0, 0.125141, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v27ij"]
+atlas = ExtResource("3_hfov0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pg3nr"]
+shader = ExtResource("2_x5adi")
+shader_parameter/color = Color(0.230325, 0.828117, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3oeh"]
+atlas = ExtResource("3_hfov0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f34w8"]
+shader = ExtResource("2_x5adi")
+shader_parameter/color = Color(0.930192, 0.74267, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4imi"]
+atlas = ExtResource("3_hfov0")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ftq2"]
+bg_color = Color(0.182804, 0.0112775, 0.0380892, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.131508, 0.0605152, 0.0172386, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akhon"]
+bg_color = Color(0.529722, 0, 0.0952215, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_qdxun")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -487.0
+offset_top = -274.0
+offset_right = 1518.0
+offset_bottom = 830.0
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="TitleScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 23.0
+offset_top = 28.0
+offset_right = 63.0
+offset_bottom = 68.0
+
+[node name="Tutorial" type="Button" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 298.0
+offset_right = 560.0
+offset_bottom = 353.0
+theme_override_colors/font_color = Color(0.466667, 0.780392, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_82w88")
+text = "Tutorial"
+
+[node name="NewGame" type="Button" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 224.0
+offset_right = 560.0
+offset_bottom = 288.0
+focus_mode = 1
+theme_override_colors/font_color = Color(0.780392, 0.619608, 0.121569, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_wqdgw")
+text = "New game"
+
+[node name="Title" type="RichTextLabel" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 75.0
+offset_right = 698.0
+offset_bottom = 157.0
+theme_override_colors/default_color = Color(0.973616, 0.766108, 0.447295, 1)
+theme_override_font_sizes/normal_font_size = 48
+text = "Of Beasts and Men "
+
+[node name="Tutorial" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Powers" type="Control" parent="Tutorial"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ToMainMenu" type="Button" parent="Tutorial/Powers"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 13.0
+offset_right = 158.0
+offset_bottom = 72.0
+mouse_default_cursor_shape = 2
+text = "<- Back to title"
+
+[node name="ToControls" type="Button" parent="Tutorial/Powers"]
+layout_mode = 0
+offset_left = 799.0
+offset_top = 14.0
+offset_right = 918.0
+offset_bottom = 73.0
+mouse_default_cursor_shape = 2
+text = "Controls ->"
+
+[node name="Title" type="RichTextLabel" parent="Tutorial/Powers"]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 3.0
+offset_right = 622.0
+offset_bottom = 81.0
+theme_override_font_sizes/normal_font_size = 48
+text = "Powers"
+
+[node name="Wolf" type="Sprite2D" parent="Tutorial/Powers"]
+material = SubResource("ShaderMaterial_8qt80")
+position = Vector2(166, 150)
+texture = SubResource("AtlasTexture_v27ij")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial/Powers/Wolf"]
+offset_left = -126.0
+offset_top = 45.0
+offset_right = 124.0
+offset_bottom = 221.0
+bbcode_enabled = true
+text = "[center]Wolf
+
+Double damage, double stamina regen
+
+Continuously drains beast blood gauge
+[/center]"
+
+[node name="Bat" type="Sprite2D" parent="Tutorial/Powers"]
+material = SubResource("ShaderMaterial_pg3nr")
+position = Vector2(480, 148)
+texture = SubResource("AtlasTexture_d3oeh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial/Powers/Bat"]
+offset_left = -105.0
+offset_top = 51.0
+offset_right = 105.0
+offset_bottom = 203.0
+bbcode_enabled = true
+text = "[center]Bat
+
+Steal life from enemies
+
+Drains beast blood gauge for every hit landed
+[/center]"
+
+[node name="Bear" type="Sprite2D" parent="Tutorial/Powers"]
+material = SubResource("ShaderMaterial_f34w8")
+position = Vector2(785, 144)
+texture = SubResource("AtlasTexture_f4imi")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial/Powers/Bear"]
+offset_left = -164.0
+offset_top = 55.0
+offset_right = 162.0
+offset_bottom = 266.0
+bbcode_enabled = true
+text = "[center]Bear
+
+Gives shield proportionate to the beast blood gauge
+Useful for unavoidable damage
+
+Shield is lost when deactivating the power
+
+Consumes all
+[/center]"
+
+[node name="TransformationGauge" type="ProgressBar" parent="Tutorial/Powers"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 394.0
+offset_right = 109.0
+offset_bottom = 494.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5ftq2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_akhon")
+step = 1.0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial/Powers/TransformationGauge"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 5.0
+offset_right = 781.0
+offset_bottom = 135.0
+text = "Beast Blood Gauge
+
+Gained by hitting the enemies.
+Gauge cannot be filled while using any of the powers, deactivate them first."
+
+[node name="Controls" type="Control" parent="Tutorial"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="RichTextLabel" parent="Tutorial/Controls"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 960.0
+offset_bottom = 73.0
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Controls[/center]
+"
+
+[node name="ToPowers" type="Button" parent="Tutorial/Controls"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 13.0
+offset_right = 183.0
+offset_bottom = 72.0
+mouse_default_cursor_shape = 2
+text = "<- Back to Powers"
+
+[node name="ToMainMenu" type="Button" parent="Tutorial/Controls"]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 14.0
+offset_right = 904.0
+offset_bottom = 73.0
+mouse_default_cursor_shape = 2
+text = "Back to title ->"
+
+[node name="LeftSide" type="RichTextLabel" parent="Tutorial/Controls"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 93.0
+offset_right = 485.0
+offset_bottom = 492.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[left]
+Movement:
+	W/S/A/D
+Dodge forward:
+	Space + movement key
+Backstep:
+	Space
+[/left]
+
+
+ 
+"
+scroll_active = false
+
+[node name="RightSide" type="RichTextLabel" parent="Tutorial/Controls"]
+layout_mode = 0
+offset_left = 579.0
+offset_top = 88.0
+offset_right = 953.0
+offset_bottom = 488.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[left]
+Activate Powers:
+	Wolf - 1
+	Bat - 2
+	Bear - 3
+
+Attack: J or Left Mouse
+[/left]"
+
+[connection signal="pressed" from="TitleScreen/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="TitleScreen/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Tutorial/Powers/ToMainMenu" to="." method="_on_to_main_menu_pressed"]
+[connection signal="pressed" from="Tutorial/Powers/ToControls" to="." method="_on_to_controls_pressed"]
+[connection signal="pressed" from="Tutorial/Controls/ToPowers" to="." method="_on_to_powers_pressed"]
+[connection signal="pressed" from="Tutorial/Controls/ToMainMenu" to="." method="_on_to_main_menu_pressed"]
